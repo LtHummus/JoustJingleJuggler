@@ -27,6 +27,8 @@ def read_file(filename):
     return lines
 
 
+# i realize that this is O(n), but these lists are small
+# in practice
 def song_should_override(song, override_list):
     for x in override_list:
         if x.startswith(song):
