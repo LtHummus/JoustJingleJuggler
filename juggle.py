@@ -39,12 +39,13 @@ def song_should_override(song, override_list):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Joust Jingle Juggler")
-    parser.add_argument('--no-shuffle', '-a', action='store_false', dest='shuffle')
+    parser.add_argument('--alpha', '-a', action='store_false', dest='shuffle')
     parser.add_argument('--slow', default=DEFAULT_SLOW)
     parser.add_argument('--menu', default=DEFAULT_MENU)
     parser.add_argument('--fast', default=DEFAULT_FAST)
     parser.add_argument('--excludes-file', '-e', default=os.path.join('.', 'excludes'))
     parser.add_argument('--overrides-file', '-o', default=os.path.join('.', 'overrides'))
+    parser.add_argument('--no-write-shuffle', '-w', action='store_false', dest='write_shuffle')
     flags = parser.parse_args()
 
     found_songs = list_audio('.')
@@ -66,8 +67,15 @@ if __name__ == '__main__':
             sys.stderr.write("Excluding %s\n" % curr)
             sys.stderr.flush()
 
+    print 'ENABLE_USER_PLAYLIST    true'
+
     if flags.shuffle:
         random.shuffle(text_to_write)
+
+    if flags.write_shuffle:
+        print 'ENABLE_SHUFFLE     true'
+    else:
+        print 'ENABLE_SHUFFLE     false'
 
     print '\n'.join(text_to_write)
 
