@@ -45,7 +45,7 @@ if __name__ == '__main__':
     parser.add_argument('--fast', default=DEFAULT_FAST)
     parser.add_argument('--excludes-file', '-e', default=os.path.join('.', 'excludes'))
     parser.add_argument('--overrides-file', '-o', default=os.path.join('.', 'overrides'))
-    parser.add_argument('--no-write-shuffle', '-w', action='store_false', dest='write_shuffle')
+    parser.add_argument('--write-shuffle', '-s', action='store_true', dest='write_shuffle')
     flags = parser.parse_args()
 
     found_songs = list_audio('.')
